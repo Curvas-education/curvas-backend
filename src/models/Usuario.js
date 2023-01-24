@@ -1,4 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
+require('dotenv').config()
 const bcrypt = require("bcrypt");
 
 class Usuarios extends Model {
@@ -20,13 +21,13 @@ class Usuarios extends Model {
             hooks: {
                 beforeCreate: async (user) => {
                     if(user.senha){
-                        const salt = await bcrypt.genSaltSync(10, 'a');
+                        const salt = await bcrypt.genSaltSync(10, process.env.SALT_BCRYPT);
                         user.senha = bcrypt.hashSync(user.senha, salt)
                     }
                 },
                 beforeUpdate: async (user) => {
                     if(user.senha){
-                        const salt = await bcrypt.genSaltSync(10, 'a');
+                        const salt = await bcrypt.genSaltSync(10, process.env.SALT_BCRYPT);
                         user.senha = bcrypt.hashSync(user.senha, salt)
                     }
                 }
@@ -44,6 +45,10 @@ class Usuarios extends Model {
         // this.hasMany(models.Address, { foreignKey: 'user_id', as: 'addresses'});
         // this.belongsToMany(models.Tech, { foreignKey: 'user_id', through: 'user_techs', as: 'techs'});
     }
+}
+
+Usuarios.prototype.autenticate = async function(senha){
+    return await bcrypt.compare(senha, this.senha)
 }
 
 module.exports = Usuarios;
