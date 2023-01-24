@@ -22,7 +22,7 @@ module.exports = {
           allowNull: false
         },
         cargo: {
-          type: Sequelize.ENUM("gestor","diretor","professor","aluno"),
+          type: Sequelize.INTEGER,
           allowNull: false
         },
         foto: {

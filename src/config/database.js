@@ -10,8 +10,8 @@ module.exports = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DATABASE,
-    define: {
-        timestamps: true,
+    define:{
+        underscored: true
     },
     dialectOptions: {
         ssl: {
