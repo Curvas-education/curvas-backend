@@ -15,9 +15,11 @@ app.use(express.static('public'));
 
 // Importação das rotas
 const userRoutes = require("./routes/UserRoutes");
+const questionRoutes = require("./routes/QuestionsRoutes");
 
 // Rotas
 app.use("/user", userRoutes);
+app.use("/question", questionRoutes);
 
 app.listen(PORT, ()=>{
     console.log("Rodando http://localhost:8080")

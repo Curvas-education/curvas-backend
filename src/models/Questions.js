@@ -8,14 +8,14 @@ class Questoes extends Model {
             alternativa_c: DataTypes.STRING,
             criado_por: DataTypes.INTEGER
         }, {
-            sequelize
+            sequelize,
+            modelName: "questoes"
         })
         
     }
-
-    static associate(Questoes){
+    static associate(models){
         // this.hasMany(models.Address, { foreignKey: 'user_id', as: 'addresses'});
-        // this.belongsToMany(models.Tech, { foreignKey: 'user_id', through: 'user_techs', as: 'techs'});
+        // this.belongsTo(models.Users, { foreignKey: 'user_id', through: 'user_techs', as: 'techs'});
     }
 }
 

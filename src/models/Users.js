@@ -18,13 +18,12 @@ class Usuarios extends Model {
             criado_por: DataTypes.INTEGER
         }, {
             sequelize,
+            modelName: "usuarios",
             hooks: {
                 beforeCreate: async (user) => {
                     if(user.senha){
-                        const SALT_BCRYPT = process.env.SALT_BCRYPT;
-                        
-                        const salt = bcrypt.genSaltSync(10, SALT_BCRYPT);
-                        console.log(salt)
+                        // const SALT_BCRYPT = process.env.SALT_BCRYPT;
+                        const salt = await bcrypt.genSalt(10);
                         user.senha = bcrypt.hashSync(user.senha, salt)
                     }
                 },
@@ -45,7 +44,7 @@ class Usuarios extends Model {
     }
 
     static associate(models){
-        // this.hasMany(models.Address, { foreignKey: 'user_id', as: 'addresses'});
+        // this.hasMany(models.Questions, { foreignKey: 'criado_por', as: 'addresses'});
         // this.belongsToMany(models.Tech, { foreignKey: 'user_id', through: 'user_techs', as: 'techs'});
     }
 }

@@ -1,6 +1,7 @@
-const Usuario = require("../models/Usuario");
+const Usuario = require("../models/Users");
 const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
+const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 module.exports = {
@@ -13,6 +14,7 @@ module.exports = {
 
             console.log(userMatriculaVerify, userEmailVerification)
             if(!userMatriculaVerify && !userEmailVerification){
+
                 const user = await Usuario.create({
                     matricula,
                     nome,
@@ -23,7 +25,7 @@ module.exports = {
                     foto, 
                     criado_por
                 });
-                console.log(user)
+                
                 const token = jwt.sign({ matricula: user.matricula, cargo: user.cargo}, process.env.SECRET,{
                     expiresIn: 500000
                 })
