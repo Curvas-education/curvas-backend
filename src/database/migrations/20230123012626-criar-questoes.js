@@ -15,7 +15,7 @@ module.exports = {
         allowNull: false
       },
       alternativas: {
-        type: Sequelize.STRING,
+        type: Sequelize.JSON,
         allowNull: false
       },
       alternativa_c: {

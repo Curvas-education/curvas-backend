@@ -1,5 +1,6 @@
 const Usuario = require("../models/Usuario");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 require("dotenv").config();
 
 module.exports = {
@@ -9,7 +10,8 @@ module.exports = {
 
             const userMatriculaVerify = await Usuario.findByPk(matricula)
             const userEmailVerification = await Usuario.findOne({ where: {email}})
-            
+
+            console.log(userMatriculaVerify, userEmailVerification)
             if(!userMatriculaVerify && !userEmailVerification){
                 const user = await Usuario.create({
                     matricula,
@@ -21,25 +23,45 @@ module.exports = {
                     foto, 
                     criado_por
                 });
+                console.log(user)
                 const token = jwt.sign({ matricula: user.matricula, cargo: user.cargo}, process.env.SECRET,{
                     expiresIn: 500000
                 })
                 return res.status(201).json({user, token})
-
             } else {
                 return res.status(400).json({message: "Já existe um usuário com essas credenciais"})
             }
 
         } catch (error) {
+            console.log(error)
             return res.status(404).json({message: error})
         }
     },
 
     async index(req, res){
         try {
-            const users = await Usuario.findAll()
+            const user_matricula = req.matricula;
+            const user_cargo = req.cargo;
+            
+            if(user_cargo === "gestor"){
+                const users = await Usuario.findAll({attributes: [
+                    'matricula',
+                    'nome',
+                    'email',
+                    'telefone',
+                    'cargo'
+                ],                   
+                where:{
+                    cargo: {
+                        [Op.notLike]: "gestor"
+                    }
+                }
+                })
 
-            return res.json(users);
+                console.log(users)
+                return res.json(users);
+            }
+
         } catch (error) {
             return res.status(404).json({message: error})
         }

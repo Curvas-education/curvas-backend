@@ -13,7 +13,7 @@ class Usuarios extends Model {
             email: DataTypes.STRING,  
             senha: DataTypes.STRING,
             telefone: DataTypes.INTEGER,
-            cargo: DataTypes.STRING,
+            cargo: DataTypes.ENUM(["gestor", "diretor", "professor", "aluno"]),
             foto: DataTypes.STRING,
             criado_por: DataTypes.INTEGER
         }, {
@@ -21,7 +21,10 @@ class Usuarios extends Model {
             hooks: {
                 beforeCreate: async (user) => {
                     if(user.senha){
-                        const salt = await bcrypt.genSaltSync(10, process.env.SALT_BCRYPT);
+                        const SALT_BCRYPT = process.env.SALT_BCRYPT;
+                        
+                        const salt = bcrypt.genSaltSync(10, SALT_BCRYPT);
+                        console.log(salt)
                         user.senha = bcrypt.hashSync(user.senha, salt)
                     }
                 },

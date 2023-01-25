@@ -11,6 +11,7 @@ require("./database")
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
 
 // Importação das rotas
 const userRoutes = require("./routes/UserRoutes");

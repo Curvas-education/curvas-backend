@@ -4,7 +4,7 @@ class Questoes extends Model {
     static init(sequelize){
         super.init({
             enunciado: DataTypes.STRING,
-            alternativas: DataTypes.STRING,  
+            alternativas: DataTypes.JSON,  
             alternativa_c: DataTypes.STRING,
             criado_por: DataTypes.INTEGER
         }, {

@@ -15,19 +15,24 @@ module.exports = async (req, res, next) => {
   const [, token] = auth.split(" ");
 
   try {
-    const decoded = await promisify(jwt.verify)(token,process.env.SECRET);
+    const decoded = await promisify(jwt.verify)(token, process.env.SECRET);
 
     if (!decoded) {
+
       return res.status(401).json({
         error: true,
         code: 130,
         message: "Token expirado."
       })
+
     } else {
-      req.user_id = decoded.id;
+      
+      req.matricula = decoded.matricula;
+      req.cargo = decoded.cargo;
       next();
+      
     }
-    console.log(decoded);
+    
   } catch {
     return res.status(401).json({
       error: true,
