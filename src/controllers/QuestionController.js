@@ -46,5 +46,76 @@ module.exports = {
             return res.status(404).json({message: error})
         }
 
+    },
+
+    async edit(req, res){
+        try {
+            const user_matricula = req.matricula;
+            const question_id = req.params.id;
+            
+
+            const question = await Questions.findOne({
+                where: {
+                    id:{
+                        [Op.like]: question_id
+                    },
+                    criado_por: {
+                        [Op.like]: user_matricula
+                    }
+                }
+            })
+
+            if(question){
+                const {enunciado, alternativas, alternativa_c } = req.body;
+
+                const updatedQuestion = await Questions.update({
+                    enunciado, alternativas, alternativa_c
+                },{
+                where:{
+                    id: question_id
+                }})
+    
+                return res.status(200).json({message: "Questão atualizada com sucesso", updatedQuestion})
+
+            } else {
+                
+                return res.status(404).json({message: "Questão não encontrada"})
+
+            }
+
+
+        } catch (error) {
+            return res.status(404).json({message: error})
+        }
+    },
+
+    async delete(req, res){
+        try {
+            const user_matricula = req.matricula;
+            const question_id = req.params.id;
+
+            const question = await Questions.findByPk(question_id)
+
+            if(question){
+
+                const deletedQuestion = await Questions.destroy({
+                    where:{
+                        criado_por: {
+                            [Op.like]: user_matricula
+                        },
+                        id: {
+                            [Op.like]: question_id
+                        }
+                    }
+                })
+
+                return res.status(200).json({message: "Questão deletada com sucesso"})
+            } else {
+                
+                return res.status(404).json({message: "Questão não encontrada"})
+            }
+        } catch (error) {
+            return res.status(404).json({message: error})
+        }
     }
 }
