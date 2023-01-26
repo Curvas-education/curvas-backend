@@ -30,8 +30,8 @@ module.exports = {
 
     async list(req, res){
         try {
-            const user_matricula = req.body;
-            
+            const user_matricula = req.matricula;
+            console.log(user_matricula)
             const questions = await Questions.findAll({
                 where: {
                     criado_por:{
@@ -39,6 +39,8 @@ module.exports = {
                     }
                 }
             })
+
+            return res.status(200).json({ questions })
 
         } catch (error) {
             return res.status(404).json({message: error})
