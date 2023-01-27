@@ -3,8 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-
-    await queryInterface.createTable('categorias', { 
+    await queryInterface.createTable('disciplinas', { 
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -15,23 +14,15 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      disciplina: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "disciplinas",
-          key: "id",
-        }
-      },
+      ementa: {
+        type: Sequelize.STRING,
+        allowNull: true
+      }
     });
-
   },
 
   async down (queryInterface, Sequelize) {
-
-    await queryInterface.dropTable('categorias');
-
+    await queryInterface.dropTable('users');
   }
 };
 
-turma_aluno 

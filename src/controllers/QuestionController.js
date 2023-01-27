@@ -1,5 +1,4 @@
 const Questions = require("../models/Questions");
-const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
 require("dotenv").config();
 
@@ -9,7 +8,8 @@ module.exports = {
             // Verificar os acessos : gestor 
             const user_matricula = req.matricula;
             const user_cargo = req.cargo;
-            if(user_cargo === "gestor"){
+            
+            if(user_cargo === "professor" || user_cargo === "coordenador" || user_cargo === "gestor"){
                 const {enunciado, alternativas, alternativa_c } = req.body;
                 
                 const question = await Questions.create({
@@ -31,16 +31,26 @@ module.exports = {
     async list(req, res){
         try {
             const user_matricula = req.matricula;
-            console.log(user_matricula)
-            const questions = await Questions.findAll({
-                where: {
-                    criado_por:{
-                        [Op.like]: user_matricula
-                    }
-                }
-            })
+            const user_cargo = req.cargo;
 
-            return res.status(200).json({ questions })
+            if(user_cargo === "professor" || user_cargo === "coordenador" || user_cargo === "gestor"){
+
+                const questions = await Questions.findAll({
+                    where: {
+                        criado_por:{
+                            [Op.like]: user_matricula
+                        }
+                    }
+                })
+    
+                return res.status(200).json({ questions })
+
+            }else{
+
+                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+            
+            }
+
 
         } catch (error) {
             return res.status(404).json({message: error})
@@ -51,9 +61,9 @@ module.exports = {
     async edit(req, res){
         try {
             const user_matricula = req.matricula;
+            const user_cargo = req.cargo; 
             const question_id = req.params.id;
             
-
             const question = await Questions.findOne({
                 where: {
                     id:{
@@ -92,6 +102,7 @@ module.exports = {
     async delete(req, res){
         try {
             const user_matricula = req.matricula;
+            const user_cargo = req.cargo;
             const question_id = req.params.id;
 
             const question = await Questions.findByPk(question_id)

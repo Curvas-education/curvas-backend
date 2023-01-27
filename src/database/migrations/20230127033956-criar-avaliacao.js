@@ -4,7 +4,7 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
 
-    await queryInterface.createTable('categorias', { 
+    await queryInterface.createTable('avaliacoes', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -15,6 +15,18 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      instrucao: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      turma: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "turmas",
+          key: "id",
+        }
+      },
       disciplina: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -23,15 +35,20 @@ module.exports = {
           key: "id",
         }
       },
-    });
+      data: {
+        type: Sequelize.DATE,
+        allowNull: false
+      }
+      });
 
   },
 
   async down (queryInterface, Sequelize) {
-
-    await queryInterface.dropTable('categorias');
-
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
   }
 };
-
-turma_aluno 
