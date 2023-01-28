@@ -1,7 +1,6 @@
 const Usuario = require("../models/Users");
 const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
-const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 module.exports = {

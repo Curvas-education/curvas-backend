@@ -15,6 +15,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      descricao: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       disciplina: {
         type: Sequelize.INTEGER,
         allowNull: false,
