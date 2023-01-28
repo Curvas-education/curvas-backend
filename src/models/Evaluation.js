@@ -10,7 +10,8 @@ class Avaliacao extends Model {
             data: DataTypes.DATE,
         }, {
             sequelize,
-            modelName: "avaliacoes"
+            modelName: "avaliacoes",
+            timestamps: false
         })
         
     }

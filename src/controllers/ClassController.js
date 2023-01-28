@@ -5,6 +5,7 @@ require("dotenv").config();
 module.exports = {
     async create(req, res) {
         try {
+            const user_cargo  = req.cargo;
             if(user_cargo === "professor" || user_cargo === "coordenador" || user_cargo === "gestor"){
 
 

@@ -9,7 +9,7 @@ module.exports = {
             
             if(user_cargo === "professor" || user_cargo === "coordenador" || user_cargo === "gestor"){
                 const { titulo, disciplina, descricao } = req.body;
-                
+                console.log(titulo, disciplina, descricao)
                 const category = await Category.create({ 
                     titulo,
                     disciplina,
@@ -23,6 +23,7 @@ module.exports = {
             }
 
         } catch (error) {
+            console.log(error)
             return res.status(404).json({message: error})
         }
     },

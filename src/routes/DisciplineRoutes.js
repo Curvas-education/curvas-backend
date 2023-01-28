@@ -3,9 +3,9 @@ const DisciplineController = require("../controllers/DisciplineController");
 const UserMiddleware = require("../middlewares/UsuarioAuth");
 const routes = express.Router();
 
-routes.post("/create", UserMiddleware,  )
-routes.get("/list", UserMiddleware, )
-routes.put("/:id/edit", UserMiddleware,  )
-routes.delete("/:id/delete", UserMiddleware, )
+routes.post("/create", UserMiddleware,  DisciplineController.create);
+routes.get("/list", UserMiddleware, DisciplineController.delete);
+routes.put("/:id/edit", UserMiddleware, DisciplineController.edit);
+routes.delete("/:id/delete", UserMiddleware, DisciplineController.delete);
 
 module.exports = routes;

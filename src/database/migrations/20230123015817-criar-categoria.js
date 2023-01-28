@@ -26,7 +26,7 @@ module.exports = {
           model: "disciplinas",
           key: "id",
         }
-      },
+      }
     });
 
   },
@@ -37,5 +37,3 @@ module.exports = {
 
   }
 };
-
-turma_aluno 

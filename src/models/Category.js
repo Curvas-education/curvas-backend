@@ -14,6 +14,7 @@ class Categoria extends Model {
     }
     static associate(models){
     }
+
 }
 
 module.exports = Categoria;
