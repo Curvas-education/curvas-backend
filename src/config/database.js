@@ -4,6 +4,8 @@ require('dotenv').config()
 
 const dirpath = path.join(__dirname, "..", "..", "ssl", "DigiCertGlobalRootCA.crt.pem")
 
+console.log(dirpath)
+
 module.exports = {
     dialect: 'mysql',
     host: process.env.DB_HOST,

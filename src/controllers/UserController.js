@@ -75,7 +75,9 @@ module.exports = {
             
             const user = await Usuario.findOne({where: {email}})
             if(user){
-                const isPasswordValid = user.autenticate(senha);
+
+                const isPasswordValid = await user.autenticate(senha);
+                
                 if(isPasswordValid){
                     const token = jwt.sign({ matricula: user.matricula, cargo: user.cargo}, process.env.SECRET,{
                         expiresIn: 500000
