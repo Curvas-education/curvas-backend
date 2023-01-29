@@ -35,7 +35,7 @@ module.exports = {
 
         } catch (error) {
             console.log(error)
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -64,7 +64,7 @@ module.exports = {
             }
 
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
 
     },
@@ -82,13 +82,13 @@ module.exports = {
                     })
                     return res.status(200).json({ user, token })
                 }else{
-                    return res.status(404).json({message: "Credenciais incorretas"})
+                    return res.status(400).json({message: "Credenciais incorretas"})
                 }         
             }else{
-                return res.status(404).json({message: "Credenciais incorretas"})
+                return res.status(400).json({message: "Credenciais incorretas"})
             }
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     }
 }

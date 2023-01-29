@@ -10,11 +10,11 @@ module.exports = {
 
 
             } else {
-                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+                return res.status(400).json({message: "Você não tem permissão para acessar essa rota"})
             }
 
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -22,7 +22,7 @@ module.exports = {
         try {
 
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
 
     },
@@ -31,7 +31,7 @@ module.exports = {
         try {
 
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -39,7 +39,7 @@ module.exports = {
         try {
 
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     }
 }

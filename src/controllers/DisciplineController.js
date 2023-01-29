@@ -25,18 +25,18 @@ module.exports = {
                         ementa
                     })
 
-                    return res.status(404).json({ discipline })
+                    return res.status(400).json({ discipline })
                 } else {
-                    return res.status(404).json({message: "Já existe disciplina com esse titulo"})
+                    return res.status(400).json({message: "Já existe disciplina com esse titulo"})
                 }
 
             } else {
-                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+                return res.status(400).json({message: "Você não tem permissão para acessar essa rota"})
             }
 
         } catch (error) {
             console.log(error)
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -45,7 +45,7 @@ module.exports = {
             const disciplines = await Discipline.findAll();
             return res.status(200).json({ disciplines })
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
 
     },
@@ -58,6 +58,8 @@ module.exports = {
                 const { titulo, ementa } = req.body;
                 const id_discipline = req.params.id; 
 
+                
+
                 const updatedDiscipline = await Discipline.update({
                     titulo,ementa
                 },{
@@ -68,10 +70,10 @@ module.exports = {
 
                 return res.status(200).json({updatedDiscipline})
             } else { 
-                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+                return res.status(400).json({message: "Você não tem permissão para acessar essa rota"})
             }
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -90,10 +92,10 @@ module.exports = {
 
                 return res.status(200).json({message: "Disciplina deletada com sucesso"})
             } else { 
-                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+                return res.status(400).json({message: "Você não tem permissão para acessar essa rota"})
             }
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     }
 }

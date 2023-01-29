@@ -19,12 +19,12 @@ module.exports = {
                 return res.status(200).json({category})
 
             } else {
-                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+                return res.status(400).json({message: "Você não tem permissão para acessar essa rota"})
             }
 
         } catch (error) {
             console.log(error)
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -35,7 +35,7 @@ module.exports = {
             return res.status(200).json({categories})
 
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
 
     },
@@ -61,10 +61,10 @@ module.exports = {
                 return res.status(200).json({updatedCategory})
 
             } else {
-                return res.status(404).json({message: "Você não tem permissão para acessar essa rota"})
+                return res.status(400).json({message: "Você não tem permissão para acessar essa rota"})
             }
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     },
 
@@ -87,10 +87,10 @@ module.exports = {
                 return res.status(200).json({message: "Categoria deletada com sucesso"})
             } else {
                 
-                return res.status(404).json({message: "Categoria não encontrada"})
+                return res.status(400).json({message: "Categoria não encontrada"})
             }
         } catch (error) {
-            return res.status(404).json({message: error})
+            return res.status(400).json({message: error})
         }
     }
 }
