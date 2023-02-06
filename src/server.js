@@ -29,6 +29,6 @@ app.use("/class", classRoutes);
 app.use("/discipline", disciplineRoutes);
 app.use("/evaluation", evaluationRoutes);
 
-app.listen(PORT, ()=>{
-    console.log("Rodando http://localhost:8080")
-})
+app.listen(PORT, () => {
+    console.log("Rodando http://localhost:" + PORT)
+});
